@@ -30,7 +30,7 @@ def callback():
         abort(400)
     return 'OK'
 
-# 處理訊息
+
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
     message = TextSendMessage(text=event.message.text)
@@ -48,7 +48,7 @@ def handle_message(event):
             line_bot_api.reply_message(
                 event.reply_token,
                 TextSendMessage(text="Bot can't use profile API without user ID"))
-    elif text == '2':
+    elif text == '食材・弁当デリバリー':
 
         line_bot_api.reply_message(
             event.reply_token, [
@@ -62,6 +62,17 @@ def handle_message(event):
                 TextSendMessage(text='・居酒屋「くーろん」 \n・原田商店 \n 63 Pham Viet Chanh street.,District Binh Thanh,Ho Chi Minh \n TEL：08 3840 9826 \n 携帯：090 829 5470')
             ]
         )
+    elif text == 'メニュー':
+        line_bot_api.reply_message(
+            event.reply_token,[
+                ImageSendMessage(
+                        original_content_url='https://lh3.googleusercontent.com/proxy/G12tIEnHtWQBLceysW6zYGEmi-aeJmRU_uMbAbW0vGpmMDhtEsV9dLFoIyGvgOC6jtN8397MJhzfjD_tOOa9wgEUfavGIInWJLwW8MU7anb9nbyZuO_2DMm0J_r5RZ6kEQ',
+                        preview_image_url='https://lh3.googleusercontent.com/proxy/G12tIEnHtWQBLceysW6zYGEmi-aeJmRU_uMbAbW0vGpmMDhtEsV9dLFoIyGvgOC6jtN8397MJhzfjD_tOOa9wgEUfavGIInWJLwW8MU7anb9nbyZuO_2DMm0J_r5RZ6kEQ'
+                )
+            ]
+        )
+
+        
 
 import os
 if __name__ == "__main__":
