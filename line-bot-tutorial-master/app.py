@@ -34,7 +34,34 @@ def callback():
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
     message = TextSendMessage(text=event.message.text)
-    line_bot_api.reply_message(event.reply_token, message)
+    text = event.message.text
+    if text == '1':
+        if isinstance(event.source, SourceUser):
+            profile = line_bot_api.get_profile(event.source.user_id)
+            line_bot_api.reply_message(
+                event.reply_token, [
+                    TextSendMessage(text='Display name: ' + profile.display_name),
+                    TextSendMessage(text='Status message: ' + str(profile.status_message))
+                ]
+            )
+        else:
+            line_bot_api.reply_message(
+                event.reply_token,
+                TextSendMessage(text="Bot can't use profile API without user ID"))
+    elif text == '2':
+        quota = line_bot_api.get_message_quota()
+        line_bot_api.reply_message(
+            event.reply_token, [
+                TextSendMessage(text='type: ' + quota.type),
+                TextSendMessage(text='value: ' + str(quota.value))
+            ]
+        )
+    elif text =='3':
+        line_bot_api.reply_message(
+            event.reply_token_message,[
+                TextSendMessage(text = 'day la so 3')
+            ]
+        )
 
 import os
 if __name__ == "__main__":
