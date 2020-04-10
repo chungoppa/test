@@ -41,8 +41,8 @@ def handle_message(event):
             profile = line_bot_api.get_profile(event.source.user_id)
             line_bot_api.reply_message(
                 event.reply_token, [
-                    TextSendMessage(text='Hello' + profile.display_name +'san , you want to book a table ? \n please tell me ' ),
-                    TextSendMessage(text='your number : ' ),
+                    TextSendMessage(text='Hello  ' + profile.display_name +'san :) , you want to book a table ? \n please tell me' ),
+                    
                     TextSendMessage(text = '何名様でお越しでしょうか？')
 
                 ]
@@ -84,7 +84,7 @@ def handle_message(event):
                     "contents": [
                       {
                         "type": "image",
-                        "url": "https://scdn.line-apps.com/n/channel_devcenter/img/flexsnapshot/clip/clip3.jpg",
+                        "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/60/Sushi_platter.jpg/1200px-Sushi_platter.jpg",
                         "position": "relative",
                         "size": "full",
                         "aspectMode": "cover",
@@ -101,7 +101,7 @@ def handle_message(event):
                             "contents": [
                               {
                                 "type": "text",
-                                "text": "Brown Hotel",
+                                "text": "Sushi",
                                 "weight": "bold",
                                 "size": "xl",
                                 "color": "#ffffff"
@@ -182,7 +182,7 @@ def handle_message(event):
                         "contents": [
                           {
                             "type": "text",
-                            "text": "SALE",
+                            "text": "OFF - 20 %",
                             "color": "#ffffff"
                           }
                         ],
