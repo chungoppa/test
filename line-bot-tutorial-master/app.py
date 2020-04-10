@@ -67,7 +67,7 @@ def handle_message(event):
         line_bot_api.reply_message(
             event.reply_token,[
                 ImageSendMessage(
-                        original_content_url='https://lh3.googleusercontent.com/proxy/G12tIEnHtWQBLceysW6zYGEmi-aeJmRU_uMbAbW0vGpmMDhtEsV9dLFoIyGvgOC6jtN8397MJhzfjD_tOOa9wgEUfavGIInWJLwW8MU7anb9nbyZuO_2DMm0J_r5RZ6kEQ',
+                        original_content_url='https://usercontent1.hubstatic.com/13821706_f520.jpg',
                         preview_image_url='https://lh3.googleusercontent.com/proxy/G12tIEnHtWQBLceysW6zYGEmi-aeJmRU_uMbAbW0vGpmMDhtEsV9dLFoIyGvgOC6jtN8397MJhzfjD_tOOa9wgEUfavGIInWJLwW8MU7anb9nbyZuO_2DMm0J_r5RZ6kEQ'
                 )
             ]
