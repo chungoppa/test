@@ -72,9 +72,8 @@ def handle_message(event):
                                                 data='time_postback',
                                                 mode='time')),
             ])
-            template_message = TemplateSendMessage(
-                alt_text='ImageCarousel alt text', template=image_carousel_template)
-            line_bot_api.reply_message(event.reply_token, template_message)
+            template_message = TemplateSendMessage(alt_text='ImageCarousel alt text', template=image_carousel_template)
+            # line_bot_api.reply_message(event.reply_token, template_message)
             
             line_bot_api.reply_message(
                 event.reply_token, [
@@ -103,7 +102,7 @@ def handle_message(event):
                             action=LocationAction(label="label6")
                         ),
                     ]))
-                ]
+                ],template_message
             )
             
 
