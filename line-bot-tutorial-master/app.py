@@ -1,5 +1,6 @@
 from flask import Flask, request, abort
 import json
+import datetime
 
 from linebot import (
     LineBotApi, WebhookHandler
@@ -37,6 +38,17 @@ def callback():
 def handle_message(event):
     message = TextSendMessage(text=event.message.text)
     text = event.message.text
+    if text == 'insight_message_delivery':
+        today = datetime.date.today().strftime("%Y%m%d")
+        response = line_bot_api.get_insight_message_delivery(today)
+        if response.status == 'ready':
+            messages = [
+                TextSendMessage(text='broadcast: ' + str(response.broadcast)),
+                TextSendMessage(text='targeting: ' + str(response.targeting)),
+            ]
+        else:
+            messages = [TextSendMessage(text='status: ' + response.status)]
+        line_bot_api.reply_message(event.reply_token, messages)
     if text == 'レストラン予約':
         if isinstance(event.source, SourceUser):
             profile = line_bot_api.get_profile(event.source.user_id)
