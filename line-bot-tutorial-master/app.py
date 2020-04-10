@@ -38,17 +38,21 @@ def callback():
 def handle_message(event):
     message = TextSendMessage(text=event.message.text)
     text = event.message.text
-    if text == 'insight_message_delivery':
-        today = datetime.date.today().strftime("%Y%m%d")
-        response = line_bot_api.get_insight_message_delivery(today)
-        if response.status == 'ready':
-            messages = [
-                TextSendMessage(text='broadcast: ' + str(response.broadcast)),
-                TextSendMessage(text='targeting: ' + str(response.targeting)),
-            ]
-        else:
-            messages = [TextSendMessage(text='status: ' + response.status)]
-        line_bot_api.reply_message(event.reply_token, messages)
+    if text == '1':
+        image_carousel_template = ImageCarouselTemplate(columns=[
+            ImageCarouselColumn(image_url='https://via.placeholder.com/1024x1024',
+                                action=DatetimePickerAction(label='datetime',
+                                                            data='datetime_postback',
+                                                            mode='datetime')),
+            ImageCarouselColumn(image_url='https://via.placeholder.com/1024x1024',
+                                action=DatetimePickerAction(label='date',
+                                                            data='date_postback',
+                                                            mode='date'))
+        ])
+        template_message = TemplateSendMessage(
+            alt_text='ImageCarousel alt text', template=image_carousel_template)
+        line_bot_api.reply_message(event.reply_token, template_message)
+        
     if text == 'レストラン予約':
         if isinstance(event.source, SourceUser):
             profile = line_bot_api.get_profile(event.source.user_id)
@@ -81,7 +85,7 @@ def handle_message(event):
                     ]))
                 ]
             )
-            
+
         else:
             line_bot_api.reply_message(
                 event.reply_token,
