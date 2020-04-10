@@ -56,10 +56,10 @@ def handle_message(event):
                 TextSendMessage(text=' sorry cant not book a delivery oder rightnow !')
             ]
         )
-    elif text == '3':
+    elif text == 'お問合せ':
         line_bot_api.reply_message(
             event.reply_token, [
-                TextSendMessage(text='day la so 3')
+                TextSendMessage(text='・居酒屋「くーろん」 \n・原田商店 \n 63 Pham Viet Chanh street.,District Binh Thanh,Ho Chi Minh \n TEL：08 3840 9826 \n 携帯：090 829 5470')
             ]
         )
 
