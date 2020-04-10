@@ -26,6 +26,13 @@ def callback():
     # get request body as text
     body = request.get_data(as_text=True)
     app.logger.info("Request body: " + body)
+    #myshit
+    @handler.add(JoinEvent , message= TextMessage)
+    def sendGreetingms(event):
+        line_bot_api.reply_message(
+            event.reply_token,
+            TextSendMessage(text='hello'))
+
     # handle webhook body
     try:
         handler.handle(body, signature)
@@ -76,8 +83,8 @@ def handle_message(event):
         if isinstance(event.source, SourceUser):
             profile = line_bot_api.get_profile(event.source.user_id)
 
-            
-            
+
+
             line_bot_api.reply_message(
                 event.reply_token, [
                     TextSendMessage(
@@ -107,7 +114,7 @@ def handle_message(event):
                     ]))
                 ]
             )
-            
+
 
         else:
             line_bot_api.reply_message(
