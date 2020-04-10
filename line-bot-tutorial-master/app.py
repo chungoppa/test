@@ -1,4 +1,5 @@
 from flask import Flask, request, abort
+import json
 
 from linebot import (
     LineBotApi, WebhookHandler
@@ -40,9 +41,10 @@ def handle_message(event):
             profile = line_bot_api.get_profile(event.source.user_id)
             line_bot_api.reply_message(
                 event.reply_token, [
-                    TextSendMessage(text='Hello ' + profile.display_name +'-san , you want to book a table ? \n please tell me ' ),
+                    TextSendMessage(text='Hello' + profile.display_name +'san , you want to book a table ? \n please tell me ' ),
+                    TextSendMessage(text='your number : ' ),
                     TextSendMessage(text = '何名様でお越しでしょうか？')
-                    
+
                 ]
             )
         else:
@@ -67,16 +69,141 @@ def handle_message(event):
         line_bot_api.reply_message(
             event.reply_token,[
                 ImageSendMessage(
-                        original_content_url='https://usercontent1.hubstatic.com/13821706_f520.jpg',
+                        original_content_url='https://lh3.googleusercontent.com/proxy/G12tIEnHtWQBLceysW6zYGEmi-aeJmRU_uMbAbW0vGpmMDhtEsV9dLFoIyGvgOC6jtN8397MJhzfjD_tOOa9wgEUfavGIInWJLwW8MU7anb9nbyZuO_2DMm0J_r5RZ6kEQ',
                         preview_image_url='https://lh3.googleusercontent.com/proxy/G12tIEnHtWQBLceysW6zYGEmi-aeJmRU_uMbAbW0vGpmMDhtEsV9dLFoIyGvgOC6jtN8397MJhzfjD_tOOa9wgEUfavGIInWJLwW8MU7anb9nbyZuO_2DMm0J_r5RZ6kEQ'
                 )
             ]
         )
     elif text =='営業時間':
+        bubble_string = """
+                {
+                  "type": "bubble",
+                  "body": {
+                    "type": "box",
+                    "layout": "vertical",
+                    "contents": [
+                      {
+                        "type": "image",
+                        "url": "https://scdn.line-apps.com/n/channel_devcenter/img/flexsnapshot/clip/clip3.jpg",
+                        "position": "relative",
+                        "size": "full",
+                        "aspectMode": "cover",
+                        "aspectRatio": "1:1",
+                        "gravity": "center"
+                      },
+                      {
+                        "type": "box",
+                        "layout": "horizontal",
+                        "contents": [
+                          {
+                            "type": "box",
+                            "layout": "vertical",
+                            "contents": [
+                              {
+                                "type": "text",
+                                "text": "Brown Hotel",
+                                "weight": "bold",
+                                "size": "xl",
+                                "color": "#ffffff"
+                              },
+                              {
+                                "type": "box",
+                                "layout": "baseline",
+                                "margin": "md",
+                                "contents": [
+                                  {
+                                    "type": "icon",
+                                    "size": "sm",
+                                    "url": "https://scdn.line-apps.com/n/channel_devcenter/img/fx/review_gold_star_28.png"
+                                  },
+                                  {
+                                    "type": "icon",
+                                    "size": "sm",
+                                    "url": "https://scdn.line-apps.com/n/channel_devcenter/img/fx/review_gold_star_28.png"
+                                  },
+                                  {
+                                    "type": "icon",
+                                    "size": "sm",
+                                    "url": "https://scdn.line-apps.com/n/channel_devcenter/img/fx/review_gold_star_28.png"
+                                  },
+                                  {
+                                    "type": "icon",
+                                    "size": "sm",
+                                    "url": "https://scdn.line-apps.com/n/channel_devcenter/img/fx/review_gold_star_28.png"
+                                  },
+                                  {
+                                    "type": "icon",
+                                    "size": "sm",
+                                    "url": "https://scdn.line-apps.com/n/channel_devcenter/img/fx/review_gray_star_28.png"
+                                  },
+                                  {
+                                    "type": "text",
+                                    "text": "4.0",
+                                    "size": "sm",
+                                    "color": "#d6d6d6",
+                                    "margin": "md",
+                                    "flex": 0
+                                  }
+                                ]
+                              }
+                            ]
+                          },
+                          {
+                            "type": "box",
+                            "layout": "vertical",
+                            "contents": [
+                              {
+                                "type": "text",
+                                "text": "¥62,000",
+                                "color": "#a9a9a9",
+                                "decoration": "line-through",
+                                "align": "end"
+                              },
+                              {
+                                "type": "text",
+                                "text": "¥42,000",
+                                "color": "#ebebeb",
+                                "size": "xl",
+                                "align": "end"
+                              }
+                            ]
+                          }
+                        ],
+                        "position": "absolute",
+                        "offsetBottom": "0px",
+                        "offsetStart": "0px",
+                        "offsetEnd": "0px",
+                        "backgroundColor": "#00000099",
+                        "paddingAll": "20px"
+                      },
+                      {
+                        "type": "box",
+                        "layout": "vertical",
+                        "contents": [
+                          {
+                            "type": "text",
+                            "text": "SALE",
+                            "color": "#ffffff"
+                          }
+                        ],
+                        "position": "absolute",
+                        "backgroundColor": "#ff2600",
+                        "cornerRadius": "20px",
+                        "paddingAll": "5px",
+                        "offsetTop": "10px",
+                        "offsetEnd": "10px",
+                        "paddingStart": "10px",
+                        "paddingEnd": "10px"
+                      }
+                    ],
+                    "paddingAll": "0px"
+                  }
+                }
+                """
+        message = FlexSendMessage(alt_text="hello", contents=json.loads(bubble_string))
         line_bot_api.reply_message(
-            event.reply_token,[
-                TextSendMessage(text= 'asd')
-            ]
+            event.reply_token,
+            message
         )
 
 
