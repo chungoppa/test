@@ -68,9 +68,9 @@ def handle_message(event):
             image_carousel_template = ImageCarouselTemplate(columns=[
                 ImageCarouselColumn(
                     image_url='https://www.clipartly.com/wp-content/uploads/2018/10/Cartoon-Alarm-Clock-Clipart-Png.png',
-                    action=DatetimePickerAction(label='datetime',
-                                                data='datetime_postback',
-                                                mode='datetime')),
+                    action=DatetimePickerAction(label='time',
+                                                data='time_postback',
+                                                mode='time')),
             ])
             template_message = TemplateSendMessage(
                 alt_text='ImageCarousel alt text', template=image_carousel_template)
