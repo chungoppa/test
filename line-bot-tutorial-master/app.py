@@ -64,6 +64,18 @@ def handle_message(event):
     if text == 'レストラン予約':
         if isinstance(event.source, SourceUser):
             profile = line_bot_api.get_profile(event.source.user_id)
+
+            image_carousel_template = ImageCarouselTemplate(columns=[
+                ImageCarouselColumn(
+                    image_url='https://www.clipartly.com/wp-content/uploads/2018/10/Cartoon-Alarm-Clock-Clipart-Png.png',
+                    action=DatetimePickerAction(label='datetime',
+                                                data='datetime_postback',
+                                                mode='datetime')),
+            ])
+            template_message = TemplateSendMessage(
+                alt_text='ImageCarousel alt text', template=image_carousel_template)
+            line_bot_api.reply_message(event.reply_token, template_message)
+            
             line_bot_api.reply_message(
                 event.reply_token, [
                     TextSendMessage(
@@ -93,15 +105,7 @@ def handle_message(event):
                     ]))
                 ]
             )
-            image_carousel_template = ImageCarouselTemplate(columns=[
-                ImageCarouselColumn(image_url='https://www.clipartly.com/wp-content/uploads/2018/10/Cartoon-Alarm-Clock-Clipart-Png.png',
-                                    action=DatetimePickerAction(label='datetime',
-                                                                data='datetime_postback',
-                                                                mode='datetime')),
-            ])
-            template_message = TemplateSendMessage(
-                alt_text='ImageCarousel alt text', template=image_carousel_template)
-            line_bot_api.reply_message(event.reply_token, template_message)
+            
 
         else:
             line_bot_api.reply_message(
