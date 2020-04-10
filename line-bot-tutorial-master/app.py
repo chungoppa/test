@@ -44,7 +44,7 @@ def handle_message(event):
                 event.reply_token, [
                     TextSendMessage(
                         text='Hello  ' + profile.display_name + '-san :) , you want to book a table ? \n please tell me'),
-                    TextSendMessage(text='何名様でお越しでしょうか？',uick_reply=QuickReply(
+                    TextSendMessage(text='何名様でお越しでしょうか？', quick_reply=QuickReply(
                     items=[
                         QuickReplyButton(
                             action=PostbackAction(label="label1", data="data1")
