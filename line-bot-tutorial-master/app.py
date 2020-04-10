@@ -41,18 +41,26 @@ def handle_message(event):
     if text == '1':
         image_carousel_template = ImageCarouselTemplate(columns=[
             ImageCarouselColumn(image_url='https://via.placeholder.com/1024x1024',
-                                action=DatetimePickerAction(label='time',
-                                                            data='time_postback',
-                                                            mode='time')),
+                                action=DatetimePickerAction(label='datetime',
+                                                            data='datetime_postback',
+                                                            mode='datetime')),
             ImageCarouselColumn(image_url='https://via.placeholder.com/1024x1024',
                                 action=DatetimePickerAction(label='date',
                                                             data='date_postback',
-                                                            mode='date'))
+                                                            mode='time'))
         ])
         template_message = TemplateSendMessage(
             alt_text='ImageCarousel alt text', template=image_carousel_template)
         line_bot_api.reply_message(event.reply_token, template_message)
-        
+    elif text == '2':
+        confirm_template = ConfirmTemplate(text='Do it?', actions=[
+            MessageAction(label='Yes', text='Yes!'),
+            MessageAction(label='No', text='No!'),
+        ])
+        template_message = TemplateSendMessage(
+            alt_text='Confirm alt text', template=confirm_template)
+        line_bot_api.reply_message(event.reply_token, template_message)
+
     if text == 'レストラン予約':
         if isinstance(event.source, SourceUser):
             profile = line_bot_api.get_profile(event.source.user_id)
@@ -63,7 +71,7 @@ def handle_message(event):
                     TextSendMessage(text='何名様でお越しでしょうか？', quick_reply=QuickReply(
                     items=[
                         QuickReplyButton(
-                            action=PostbackAction(label="pick time", data="1")
+                            action=PostbackAction(label="label1", data="data1")
                         ),
                         QuickReplyButton(
                             action=MessageAction(label="label2", text="text2")
@@ -80,11 +88,20 @@ def handle_message(event):
                             action=CameraRollAction(label="label5")
                         ),
                         QuickReplyButton(
-                            action=LocationAction(label="send your location")
+                            action=LocationAction(label="label6")
                         ),
                     ]))
                 ]
             )
+            image_carousel_template = ImageCarouselTemplate(columns=[
+                ImageCarouselColumn(image_url='https://www.clipartly.com/wp-content/uploads/2018/10/Cartoon-Alarm-Clock-Clipart-Png.png',
+                                    action=DatetimePickerAction(label='datetime',
+                                                                data='datetime_postback',
+                                                                mode='datetime')),
+            ])
+            template_message = TemplateSendMessage(
+                alt_text='ImageCarousel alt text', template=image_carousel_template)
+            line_bot_api.reply_message(event.reply_token, template_message)
 
         else:
             line_bot_api.reply_message(
