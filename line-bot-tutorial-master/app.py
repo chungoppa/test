@@ -41,7 +41,7 @@ def handle_message(event):
             profile = line_bot_api.get_profile(event.source.user_id)
             line_bot_api.reply_message(
                 event.reply_token, [
-                    TextSendMessage(text='Hello  ' + profile.display_name +'san :) , you want to book a table ? \n please tell me' ),
+                    TextSendMessage(text='Hello  ' + profile.display_name +'-san :) , you want to book a table ? \n please tell me' ),
                     
                     TextSendMessage(text = '何名様でお越しでしょうか？')
 
@@ -56,7 +56,7 @@ def handle_message(event):
         line_bot_api.reply_message(
             event.reply_token, [
                 TextSendMessage(text=' want to oder ?'),
-                TextSendMessage(text=' sorry cant not book a delivery oder rightnow !')
+                TextSendMessage(text=' sorry  delivery oder is not avalable rightnow !')
             ]
         )
     elif text == 'お問合せ':
