@@ -26,19 +26,19 @@ def callback():
     # get request body as text
     body = request.get_data(as_text=True)
     app.logger.info("Request body: " + body)
-    #myshit
-    @handler.add(JoinEvent , message= TextMessage)
-    def sendGreetingms(event):
-        line_bot_api.reply_message(
-            event.reply_token,
-            TextSendMessage(text='hello'))
-
     # handle webhook body
     try:
         handler.handle(body, signature)
     except InvalidSignatureError:
         abort(400)
     return 'OK'
+    
+#myshit
+@handler.add(FollowEvent)
+def sendGreetingms(event):
+        line_bot_api.reply_message(
+            event.reply_token,
+            TextSendMessage(text='hello'))
 
 def gettime(event):
     image_carousel_template = ImageCarouselTemplate(columns=[
