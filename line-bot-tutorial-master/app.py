@@ -41,9 +41,9 @@ def handle_message(event):
     if text == '1':
         image_carousel_template = ImageCarouselTemplate(columns=[
             ImageCarouselColumn(image_url='https://via.placeholder.com/1024x1024',
-                                action=DatetimePickerAction(label='datetime',
-                                                            data='datetime_postback',
-                                                            mode='datetime')),
+                                action=DatetimePickerAction(label='time',
+                                                            data='time_postback',
+                                                            mode='time')),
             ImageCarouselColumn(image_url='https://via.placeholder.com/1024x1024',
                                 action=DatetimePickerAction(label='date',
                                                             data='date_postback',
@@ -63,7 +63,7 @@ def handle_message(event):
                     TextSendMessage(text='何名様でお越しでしょうか？', quick_reply=QuickReply(
                     items=[
                         QuickReplyButton(
-                            action=PostbackAction(label="label1", data="data1")
+                            action=PostbackAction(label="pick time", data="1")
                         ),
                         QuickReplyButton(
                             action=MessageAction(label="label2", text="text2")
@@ -80,7 +80,7 @@ def handle_message(event):
                             action=CameraRollAction(label="label5")
                         ),
                         QuickReplyButton(
-                            action=LocationAction(label="label6")
+                            action=LocationAction(label="send your location")
                         ),
                     ]))
                 ]
