@@ -33,6 +33,17 @@ def callback():
         abort(400)
     return 'OK'
 
+def gettime(event):
+    image_carousel_template = ImageCarouselTemplate(columns=[
+        ImageCarouselColumn(
+            image_url='https://www.clipartly.com/wp-content/uploads/2018/10/Cartoon-Alarm-Clock-Clipart-Png.png',
+            action=DatetimePickerAction(label='time',
+                                        data='time_postback',
+                                        mode='time')),
+    ])
+    template_message = TemplateSendMessage(alt_text='ImageCarousel alt text', template=image_carousel_template)
+    line_bot_api.reply_message(event.reply_token, template_message)
+
 
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
@@ -65,15 +76,7 @@ def handle_message(event):
         if isinstance(event.source, SourceUser):
             profile = line_bot_api.get_profile(event.source.user_id)
 
-            image_carousel_template = ImageCarouselTemplate(columns=[
-                ImageCarouselColumn(
-                    image_url='https://www.clipartly.com/wp-content/uploads/2018/10/Cartoon-Alarm-Clock-Clipart-Png.png',
-                    action=DatetimePickerAction(label='time',
-                                                data='time_postback',
-                                                mode='time')),
-            ])
-            template_message = TemplateSendMessage(alt_text='ImageCarousel alt text', template=image_carousel_template)
-            # line_bot_api.reply_message(event.reply_token, template_message)
+            
             
             line_bot_api.reply_message(
                 event.reply_token, [
@@ -102,7 +105,7 @@ def handle_message(event):
                             action=LocationAction(label="label6")
                         ),
                     ]))
-                ],template_message
+                ]
             )
             
 
@@ -114,8 +117,8 @@ def handle_message(event):
 
         line_bot_api.reply_message(
             event.reply_token, [
-                TextSendMessage(text=' want to oder ?'),
-                TextSendMessage(text=' sorry  delivery oder is not avalable rightnow !')
+                TextSendMessage(text='Want to oder ?'),
+                TextSendMessage(text='Sorry  delivery oder is not avalable rightnow !')
             ]
         )
     elif text == 'お問合せ':
