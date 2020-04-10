@@ -35,13 +35,14 @@ def callback():
 def handle_message(event):
     message = TextSendMessage(text=event.message.text)
     text = event.message.text
-    if text == '1':
+    if text == 'レストラン予約':
         if isinstance(event.source, SourceUser):
             profile = line_bot_api.get_profile(event.source.user_id)
             line_bot_api.reply_message(
                 event.reply_token, [
-                    TextSendMessage(text='Display name: ' + profile.display_name),
-                    TextSendMessage(text='hello handsome man above ! ')
+                    TextSendMessage(text='Hello' + profile.display_name +'san , you want to book a table ? \n please tell me ' ),
+                    TextSendMessage(text = '何名様でお越しでしょうか？')
+                    
                 ]
             )
         else:
@@ -71,8 +72,14 @@ def handle_message(event):
                 )
             ]
         )
+    elif text =='営業時間':
+        line_bot_api.reply_message(
+            event.reply_token,[
+                TextSendMessage(text= 'asd')
+            ]
+        )
 
-        
+
 
 import os
 if __name__ == "__main__":
